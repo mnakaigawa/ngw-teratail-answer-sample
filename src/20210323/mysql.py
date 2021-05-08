@@ -22,4 +22,4 @@ connection.close()
 
 # 結果表示
 for record in new_records:
-    print(record[0].strftime("%Y/%m/%d %H:%M:%S"), record[1].strftime("%Y/%m/%d %H:%M:%S"), records[2]['Item'])
+    print(record[0].strftime("%Y/%m/%d %H:%M:%S"), record[1].strftime("%Y/%m/%d %H:%M:%S"), str(record[2]))
