@@ -11,15 +11,15 @@ connection = pymysql.connect(host='localhost',
 # SQLを操作する
 with connection.cursor() as cursor:
     #「my_table」から「tw_id」が重複を省いた仮テーブル「my_table_temp」を作成する
-    sql = "Select * from START_END_TIME where Start_datetime >= 2021/3/1 00:00:00 order by Start_datetime;"
+    sql = "select * from START_END_ITEM where Start_datetime >= '2021/3/1 00:00:00' order by Start_datetime;"
     cursor.execute(sql)
     records = cursor.fetchall()
 
-    new_records = [[records[idx, 1], records[idx+1, 1], records[2]] for idx in range(len(records))]
+    new_records = [[records[idx]['End_datetime'], records[idx+1]['Start_datetime'], records[idx]['Item']] for idx in range(len(records)-1)]
 
 # MySQLから切断する
 connection.close()
 
 # 結果表示
 for record in new_records:
-    print(record)
+    print(record[0].strftime("%Y/%m/%d %H:%M:%S"), record[1].strftime("%Y/%m/%d %H:%M:%S"), records[2]['Item'])
